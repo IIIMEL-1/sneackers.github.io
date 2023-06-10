@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sneakers</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/image/ico/logo.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="opacity" onclick="ClickOnOpacity()"></div>
+    <div class="cart-block">
+      <div class="cart-container">
+        <h3>Корзина</h3>
+        <div class="cart-menu">
+          <!-- cart-items -->
+        </div>
+        <div class="cart">
+          <img src="image/icons/cartEmpty.png" alt="" />
+          <h3>Корзина пуста</h3>
+          <p>Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.</p>
+          <button class="btn-cart-back" onclick="cartPage.returnBack()">
+            Вернуться назад
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      <!---------------------->
+      <header class="header">
+        <div class="logo">
+          <img src="image/icons/logo.png" alt="logo" />
+          <div class="logo-text">
+            <h2>react sneakers</h2>
+            <p>Магазин лучших корссовок</p>
+          </div>
+        </div>
+        <ul>
+          <li class="cart-btn" onclick="cartPage.ClickOnCart()">
+            <img src="image/icons/cart.svg" alt="cart" /><span>1205 руб.</span>
+          </li>
+          <li><img src="image/icons/favourites.svg" alt="favourites" /></li>
+          <li><img src="image/icons/profile.svg" alt="profile" /></li>
+        </ul>
+      </header>
+      <!---------------------->
+      <main class="main">
+        <div class="slider">
+          <div class="slider-item">
+            <img src="https://i.ibb.co/S3Wmb9X/brends.png" alt="" />
+            <div class="slider-text">
+              <p><span> Stan Smith,</span> <br />Forever!</p>
+              <a href="#!">Купить</a>
+            </div>
+          </div>
+        </div>
+        <div class="nav">
+          <h3>Все кроссовки</h3>
+          <form>
+            <input class="search" type="text" placeholder="Поиск..." />
+          </form>
+        </div>
+        <div id="products-container">
+          <!-- card -->
+        </div>
+      </main>
+      <!---------------------->
+    </div>
+    <!---------------------->
+    <script src="products.js"></script>
+    <script src="localStorageUtil.js"></script>
+    <script src="renderProducts.js"></script>
+  </body>
+</html>
