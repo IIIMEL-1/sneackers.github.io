@@ -3,14 +3,30 @@ class Products {
     this.classNameActive = "active";
   }
 
+  countPrice() {
+    document.querySelectorAll(".cart-item");
+  }
+
   handleSetLocationStorage(element, id, price) {
     const { pushProducts, products } = localStorageUtil.putProducts(id);
 
+    let cardPrice = JSON.parse(price.replace(/\s+/g, ""));
+
+    let priceCart = JSON.parse(
+      document.querySelector(".cart-btn span").innerText
+    );
+
     if (pushProducts) {
       element.classList.add(this.classNameActive);
+      document.querySelector(".cart-btn span").innerHTML = priceCart +=
+        cardPrice;
     } else {
       element.classList.remove(this.classNameActive);
+      document.querySelector(".cart-btn span").innerHTML = priceCart -=
+        cardPrice;
     }
+
+    localStorageUtil.putPriceProducts(priceCart);
   }
 
   render() {
@@ -70,6 +86,16 @@ class Cart {
 
     this.render();
 
+    let price = el.parentElement.children[1].children[1].innerText;
+
+    let cardPrice = JSON.parse(price.replace(/\s+/g, ""));
+
+    let priceCart = JSON.parse(
+      document.querySelector(".cart-btn span").innerText
+    );
+
+    document.querySelector(".cart-btn span").innerHTML = priceCart -= cardPrice;
+
     if (!pushProducts) {
       productsPage.render();
 
@@ -77,6 +103,8 @@ class Cart {
         document.querySelector(".cart").classList.add("__empty");
       }
     }
+
+    localStorageUtil.putPriceProducts(priceCart);
   }
 
   ClickOnCart() {
@@ -100,7 +128,7 @@ class Cart {
                  <img class="cart-img" src="${img}" />
                  <div class="cart-item-info">
                    <p>${title}</p>
-                   <p>${price}</p>
+                   <p class="price">${price}</p>
                  </div>
                  <a class="cart-item__remove" onclick="cartPage.ClickOnRemoveBtn(this, '${id}')">
                    <img src="image/icons/Add.cart.svg"/>
@@ -133,4 +161,19 @@ document.querySelector(".search").oninput = function () {
       el.closest(".card").classList.remove("hidden");
     });
   }
+
+  if (document.querySelector("#products-container").innerText == "") {
+    document.querySelector(".not-found").classList.add("active");
+  } else {
+    document.querySelector(".not-found").classList.remove("active");
+  }
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (localStorageUtil.getPriceProducts() == "") {
+    return;
+  }
+
+  document.querySelector(".cart-btn span").innerText =
+    localStorageUtil.getPriceProducts();
+});

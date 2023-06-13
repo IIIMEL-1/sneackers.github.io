@@ -1,10 +1,11 @@
 class LocalStorageUtil {
   constructor() {
-    this.keyName = "products";
+    this.keyNameProducts = "products";
+    this.keyNamePrice = "priceCart";
   }
 
   getProducts() {
-    const productsLocalStorage = localStorage.getItem(this.keyName);
+    const productsLocalStorage = localStorage.getItem(this.keyNameProducts);
 
     if (productsLocalStorage !== null) {
       return JSON.parse(productsLocalStorage);
@@ -25,9 +26,28 @@ class LocalStorageUtil {
       products.splice(index, 1);
     }
 
-    localStorage.setItem(this.keyName, JSON.stringify(products));
+    localStorage.setItem(this.keyNameProducts, JSON.stringify(products));
 
     return { pushProducts, products }; /// если у объекта ключ и значение совпадают то их можно сократить (просто написать один ключ)
+  }
+
+  getPriceProducts() {
+    const priceLocalStorage = localStorage.getItem(this.keyNamePrice);
+
+    if (priceLocalStorage !== null) {
+      return JSON.parse(priceLocalStorage);
+    }
+
+    return [];
+  }
+
+  putPriceProducts(price) {
+    let totalPrice = this.getPriceProducts();
+
+    totalPrice.splice(0);
+    totalPrice.push(price);
+
+    localStorage.setItem(this.keyNamePrice, JSON.stringify(totalPrice));
   }
 }
 
