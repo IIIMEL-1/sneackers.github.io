@@ -36,18 +36,56 @@ body::-webkit-scrollbar-thumb {
 
 /* ----------------- */
 
-.cart-menu::-webkit-scrollbar {
+.cart-btn div {
+  font-size: 14px;
+  width: 65px;
+  transform: translateX(0px);
+  opacity: 1;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  transition: 0.2s ease-in-out;
+}
+
+.cart-btn.empty div {
+  font-size: 0px;
+  width: 0px;
+  transform: translateX(-40px);
+  opacity: 0;
+  transition: 0.1s ease-in-out;
+}
+
+.favorite-btn div {
+  width: 20px;
+  transform: translateX(0px);
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  transition: 0.2s ease-in-out;
+}
+
+.favorite-btn.empty div {
+  width: 0px;
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+.cart-menu::-webkit-scrollbar,
+.favorite-menu::-webkit-scrollbar {
   width: 15px;
 }
 
-.cart-menu::-webkit-scrollbar-thumb {
+.cart-menu::-webkit-scrollbar-thumb,
+.favorite-menu::-webkit-scrollbar-thumb {
   background-color: #8dba39c4;
   border-radius: 15px;
 }
 
-.cart-menu::-webkit-scrollbar-track {
+.cart-menu::-webkit-scrollbar-track,
+.favorite-menu::-webkit-scrollbar-track {
   background-color: #eeeeee;
   border-radius: 15px;
+  margin-bottom: 7px;
 }
 
 .cart-menu,
@@ -409,6 +447,7 @@ body::-webkit-scrollbar-thumb {
 
 .header li {
   user-select: none;
+  display: flex;
   border-radius: 8px;
   padding: 13px;
   cursor: pointer;
@@ -420,8 +459,8 @@ body::-webkit-scrollbar-thumb {
   transition: 0.2s ease-in-out;
 }
 
-.header ul li span {
-  margin-left: 10px;
+.header ul li div {
+  margin-left: 6px;
   font-weight: 600;
   font-size: 14px;
   line-height: 17px;

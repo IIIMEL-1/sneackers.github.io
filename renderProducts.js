@@ -29,7 +29,7 @@ class Products {
 
   calcAmountTax() {
     let summ = document
-      .querySelector(".cart-btn span")
+      .querySelector(".cart-btn div")
       .innerText.replace(/\s+/g, "");
 
     let tax = summ * 0.05 + Number(summ);
@@ -45,24 +45,30 @@ class Products {
     let cardPrice = JSON.parse(price.replace(/\s+/g, ""));
 
     let priceCart = JSON.parse(
-      document.querySelector(".cart-btn span").innerText.replace(/\s+/g, "")
+      document.querySelector(".cart-btn div").innerText.replace(/\s+/g, "")
     );
 
     if (pushProducts) {
       element.classList.add(this.classNameActive);
       let sum = (priceCart += cardPrice);
-      document.querySelector(".cart-btn span").innerText = this.formatSumm(sum);
+      document.querySelector(".cart-btn div").innerText = this.formatSumm(sum);
 
       this.calcAmountTax();
     } else {
       element.classList.remove(this.classNameActive);
       let sum = (priceCart -= cardPrice);
-      document.querySelector(".cart-btn span").innerText = this.formatSumm(sum);
+      document.querySelector(".cart-btn div").innerText = this.formatSumm(sum);
 
       this.calcAmountTax();
     }
 
     localStorageUtil.putPriceProducts(priceCart);
+
+    if (localStorageUtil.getProducts().length) {
+      document.querySelector(".cart-btn").classList.remove("empty");
+    } else {
+      document.querySelector(".cart-btn").classList.add("empty");
+    }
 
     if (element.closest(".block-btn")) {
       this.render();
@@ -74,8 +80,16 @@ class Products {
 
     if (pushFavorites) {
       element.classList.add(this.classNameActive);
+      document.querySelector(".favorite-btn div").innerText++;
     } else {
       element.classList.remove(this.classNameActive);
+      document.querySelector(".favorite-btn div").innerText--;
+    }
+
+    if (localStorageUtil.getFavorites().length) {
+      document.querySelector(".favorite-btn").classList.remove("empty");
+    } else {
+      document.querySelector(".favorite-btn").classList.add("empty");
     }
   }
 
@@ -155,12 +169,12 @@ class CartAndFavorite {
     let cardPrice = JSON.parse(price.replace(/\s+/g, ""));
 
     let priceCart = JSON.parse(
-      document.querySelector(".cart-btn span").innerText.replace(/\s+/g, "")
+      document.querySelector(".cart-btn div").innerText.replace(/\s+/g, "")
     );
 
     let sum = (priceCart -= cardPrice);
 
-    document.querySelector(".cart-btn span").innerText =
+    document.querySelector(".cart-btn div").innerText =
       productsPage.formatSumm(sum);
     productsPage.calcAmountTax();
 
@@ -171,6 +185,10 @@ class CartAndFavorite {
         document.querySelector(".cart").classList.add("__empty");
         document.querySelector(".cart-sum").classList.remove("active");
       }
+    }
+
+    if (!localStorageUtil.getProducts().length) {
+      document.querySelector(".cart-btn").classList.add("empty");
     }
 
     localStorageUtil.putPriceProducts(priceCart);
@@ -187,6 +205,12 @@ class CartAndFavorite {
       if (!document.querySelector(".favorite-menu").children.length) {
         document.querySelector(".favorite").classList.add("__empty");
       }
+    }
+
+    document.querySelector(".favorite-btn div").innerText--;
+
+    if (!localStorageUtil.getFavorites().length) {
+      document.querySelector(".favorite-btn").classList.add("empty");
     }
   }
 
@@ -304,10 +328,22 @@ document.querySelector(".search").oninput = function () {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  document.querySelector(".favorite-btn div").innerText =
+    localStorageUtil.getFavorites().length;
+
+  if (localStorageUtil.getFavorites().length) {
+    document.querySelector(".favorite-btn").classList.remove("empty");
+  }
+
+  if (localStorageUtil.getProducts().length) {
+    document.querySelector(".cart-btn").classList.remove("empty");
+  }
+
   if (localStorageUtil.getPriceProducts() == "") {
     return;
   }
-  document.querySelector(".cart-btn span").innerText = productsPage.formatSumm(
+
+  document.querySelector(".cart-btn div").innerText = productsPage.formatSumm(
     localStorageUtil.getPriceProducts()
   );
   productsPage.calcAmountTax();
