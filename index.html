@@ -20,18 +20,62 @@
     <link rel="shortcut icon" href="/image/ico/logo.ico" type="image/x-icon" />
   </head>
   <body>
-    <div class="opacity" onclick="ClickOnOpacity()"></div>
+    <div class="opacity"></div>
     <div class="cart-block">
       <div class="cart-container">
-        <h3>Корзина</h3>
+        <div style="display: flex">
+          <h3>Корзина</h3>
+          <div class="close-cart">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+
         <div class="cart-menu">
           <!-- cart-items -->
         </div>
         <div class="cart">
-          <img src="image/icons/cartEmpty.png" alt="" />
+          <img src="image/icons/cartEmpty.png" alt="cart-empty" />
           <h3>Корзина пуста</h3>
           <p>Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.</p>
-          <button class="btn-cart-back" onclick="cartPage.returnBack()">
+          <button class="btn-back" onclick="cartPage.returnBack()">
+            Вернуться назад
+          </button>
+        </div>
+        <div class="cart-sum">
+          <div class="block-sum">
+            <div>
+              <p>Итого:</p>
+              <div class="border"></div>
+              <p class="sum">0</p>
+            </div>
+            <div>
+              <p>Налог 5%:</p>
+              <div class="border"></div>
+              <p class="sum-tax">0</p>
+            </div>
+          </div>
+          <button>Оформить заказ</button>
+        </div>
+      </div>
+    </div>
+    <div class="favorite-block">
+      <div class="favorite-container">
+        <div style="display: flex">
+          <h3>Избранное</h3>
+          <div class="close-favorite">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div class="favorite-menu">
+          <!-- favorite items -->
+        </div>
+        <div class="favorite">
+          <img src="https://i.ibb.co/vDByDXj/notFavor.jpg" alt="cart-empty" />
+          <h3>Избранных товаров нет :(</h3>
+          <p>Вы ничего не добавляли в избранное</p>
+          <button class="btn-back" onclick="cartPage.returnBack()">
             Вернуться назад
           </button>
         </div>
@@ -49,9 +93,11 @@
         </div>
         <ul>
           <li class="cart-btn" onclick="cartPage.ClickOnCart()">
-            <img src="image/icons/cart.svg" alt="cart" /><span>1205 руб.</span>
+            <img src="image/icons/cart.svg" alt="cart" /><span>0</span>
           </li>
-          <li><img src="image/icons/favourites.svg" alt="favourites" /></li>
+          <li class="favorite-btn" onclick="cartPage.ClickOnFavorite()">
+            <img src="image/icons/favourites.svg" alt="favourites" />
+          </li>
           <li><img src="image/icons/profile.svg" alt="profile" /></li>
         </ul>
       </header>
@@ -59,7 +105,7 @@
       <main class="main">
         <div class="slider">
           <div class="slider-item">
-            <img src="https://i.ibb.co/S3Wmb9X/brends.png" alt="" />
+            <img src="https://i.ibb.co/S3Wmb9X/brends.png" alt="brends" />
             <div class="slider-text">
               <p><span> Stan Smith,</span> <br />Forever!</p>
               <a href="#!">Купить</a>
@@ -74,6 +120,10 @@
         </div>
         <div id="products-container">
           <!-- card -->
+        </div>
+        <div class="not-found">
+          <img src="image/icons/notFound.png" alt="not-found" />
+          <p>Товар не найден</p>
         </div>
       </main>
       <!---------------------->
